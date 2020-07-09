@@ -2,7 +2,7 @@ import React , { useEffect } from 'react';
 
 import './Cell.css';
 
-let Cell = ({ col, row , isFinish, isStart, isWall, onMouseDown, onMouseEnter, onMouseUp })=>{
+let Cell = ({ col, row , isFinish, isStart, isWall, onMouseDown, onMouseEnter, onMouseLeave , onMouseUp })=>{
     console.log(`Cell is rendered`);
 
     const dynamicStyleClass = isFinish ? 'cell-finish' :
@@ -28,6 +28,7 @@ let Cell = ({ col, row , isFinish, isStart, isWall, onMouseDown, onMouseEnter, o
           className={`cell ${dynamicStyleClass}`}
           onMouseDown={() => onMouseDown(row, col)}
           onMouseEnter={() => onMouseEnter(row, col)}
+          onMouseLeave={ () => onMouseLeave(row , col)}
           onMouseUp={() => onMouseUp()}
           >
           </div>);};
