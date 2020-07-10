@@ -3,10 +3,10 @@ import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/dijkstra';
 import Cell from './Cell';
 import './GridLayout.css';
 
-const START_CELL_ROW = 10;
-const START_CELL_COL = 15;
-const FINISH_CELL_ROW = 10;
-const FINISH_CELL_COL = 35;
+let START_CELL_ROW = 10;
+let START_CELL_COL = 15;
+let FINISH_CELL_ROW = 10;
+let FINISH_CELL_COL = 35;
 
 
 //---------------React Functional Component--------------------
@@ -14,13 +14,16 @@ const GridLayout = ()=>{
     console.log("GRIDLAYOUT rendered");   //for debug----
 
     const [grid , setGrid] = useState([]);
-    const [mouseIsPressed , setMIP] = useState(false);
-    const flag = useRef(false);
+    const [refresh , setRefresh] = useState(true);                  //for debug purpose
+    
+    let mouseIsPressed = false;
+    let changeStart = false;
+    let changeFinish = false;
 
     const visitedCellsInOrder = useRef([]);
     const cellsInShortestPathOrder = useRef([]);
 
-
+    
 
     //---------------reset path and walls-----------------------------------
     const resetPath = ()=>{
@@ -43,35 +46,75 @@ const GridLayout = ()=>{
 
     //--------------mouse control utilities-------------------
     const handleMouseDown = useCallback((row, col) => {
-        //console.log("grid : ", grid);
-        //const newGrid = getNewGridWithWallToggled(grid, row, col);
-        //setGrid(newGrid);
+
+        if(row === START_CELL_ROW && col === START_CELL_COL)
+        {
+          changeStart = true;
+        }
+        else if(row === FINISH_CELL_ROW && col === FINISH_CELL_COL)
+        {
+          changeFinish = true;
+        }
+        else
+        {
+          setGrid(prevGrid=>{
+            const newGrid = getNewGridWithWallToggled(prevGrid, row, col);
+            return newGrid;
+          });
+        }
+        //mouseIsPressed.current = true ;
+        mouseIsPressed = true ;
+      },[]);
+    
+    
+    const handleMouseEnter = useCallback((row, col) => {
+      console.log("start : ",START_CELL_ROW,START_CELL_COL);
+
+      console.log("chnage start : ",changeStart);
+      console.log("mouseIsPressed : ",mouseIsPressed);
+      if (!mouseIsPressed) return;
+
+      if(changeStart || changeFinish)
+      {
+        if(changeStart)
+        { 
+          START_CELL_ROW = row;
+          START_CELL_COL = col;
+        }
+        else 
+        {
+          FINISH_CELL_ROW = row;
+          FINISH_CELL_COL = col;
+        }
+        setGrid(prevGrid=>{
+          const newGrid = getNewGridWithStartToggled(prevGrid, row ,col , changeStart , changeFinish);
+          return newGrid;
+        })
+      }
+      else
+      {
         setGrid(prevGrid=>{
           const newGrid = getNewGridWithWallToggled(prevGrid, row, col);
           return newGrid;
         });
-        //setMIP(true);
-        flag.current = true ;
-      },[]);
-    
-    //const optimizedGrid = useMemo(()=>grid,[]);
-    const handleMouseEnter = useCallback((row, col) => {
-      //console.log("grid : ", grid);
+      }
+    },[]);
 
-      console.log("flag : ",flag.current);
-      //console.log('mouseispressed : ',mouseIsPressed);
-      if (!flag.current) return;
-      //const newGrid = getNewGridWithWallToggled(grid, row, col);
-      //setGrid(newGrid);
-      setGrid(prevGrid=>{
-        const newGrid = getNewGridWithWallToggled(prevGrid, row, col);
-        return newGrid;
-      });
+    const handleMouseLeave = useCallback((row,col)=>{
+      if(changeStart || changeFinish)
+      {
+        setGrid(prevGrid=>{
+          const newGrid = getNewGridWithStartToggled(prevGrid, row ,col , changeStart , changeFinish);
+          return newGrid;
+        })
+      }
     },[]);
 
     const handleMouseUp = useCallback(() => {
-    setMIP(false);
-    flag.current = false;
+    //mouseIsPressed.current = false;
+    mouseIsPressed = false;
+    changeStart = false;
+    changeFinish =  false;
     },[]);
 
 
@@ -125,7 +168,7 @@ const GridLayout = ()=>{
             <button onClick={() => visualizeDijkstra()}>
                 Visualize Dijkstra's Algorithm
             </button>
-            <button onClick ={ ()=>setMIP(prevState=>!prevState) }>
+            <button onClick ={ ()=>setRefresh(prevState=>!prevState) }>
               render app
             </button>
             <button onClick = { resetPath }>
@@ -149,9 +192,9 @@ const GridLayout = ()=>{
                             isFinish={isFinish}
                             isStart={isStart}
                             isWall={isWall}
-                            //mouseIsPressed={mouseIsPressed}
                             onMouseDown={ handleMouseDown }
                             onMouseEnter={ handleMouseEnter }
+                            onMouseLeave={ handleMouseLeave }
                             onMouseUp={ handleMouseUp }
                             />
                         );
@@ -202,5 +245,16 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   return newGrid;
 };
 
+const getNewGridWithStartToggled = (grid, row ,col , changeStart ,changeFinish) =>{
+  const newGrid = grid.slice();
+  const node = newGrid[row][col];
+  const newNode = {
+    ...node,
+    isFinish : changeFinish ? node.isStart ? node.isFinish : !node.isFinish : node.isFinish,
+    isStart : changeStart ? node.isFinish ? node.isStart : !node.isStart : node.isStart,
+  };
+  newGrid[row][col] = newNode;
+  return newGrid;
+};
 
 export default GridLayout;
