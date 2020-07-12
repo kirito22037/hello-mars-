@@ -1,5 +1,7 @@
 import React , { useState , useEffect , useCallback , useMemo , useRef } from 'react';
 import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/dijkstra';
+import { bfs, getNodesInShortestPathOrderBfs } from '../Algorithms/bfs';
+
 import Cell from './Cell';
 import './GridLayout.css';
 
@@ -35,6 +37,7 @@ const GridLayout = ()=>{
           document.getElementById(`cell-${cell.row}-${cell.col}`).classList.remove(`cell-shortest-path`);
         }, 2 * i);
       }
+      setGrid(getNewGridWithPathReset(grid,visitedCellsInOrder.current));
     };
 
     const resetWalls = ()=>{
@@ -68,10 +71,10 @@ const GridLayout = ()=>{
     
     
     const handleMouseEnter = useCallback((row, col) => {
-      console.log("start : ",START_CELL_ROW,START_CELL_COL);
+      //console.log("start : ",START_CELL_ROW,START_CELL_COL);
 
-      console.log("chnage start : ",changeStart);
-      console.log("mouseIsPressed : ",mouseIsPressed);
+      //console.log("chnage start : ",changeStart);
+      //console.log("mouseIsPressed : ",mouseIsPressed);
       if (!mouseIsPressed) return;
 
       if(changeStart || changeFinish)
@@ -119,9 +122,9 @@ const GridLayout = ()=>{
 
 
     //----------------visual effect--------------
-    const animateDijkstra = (visitedCellsInOrder, cellsInShortestPathOrder) => {
-        for (let i = 1; i < visitedCellsInOrder.length-1; i++) {
-          if (i === visitedCellsInOrder.length - 2) {
+    const animateAlgo = (visitedCellsInOrder, cellsInShortestPathOrder) => {
+        for (let i = 0; i < visitedCellsInOrder.length; i++) {
+          if (i === visitedCellsInOrder.length-1) {
             setTimeout(() => {
               animateShortestPath(cellsInShortestPathOrder);
             }, 10 * i);
@@ -129,18 +132,24 @@ const GridLayout = ()=>{
           }
           setTimeout(() => {
             const cell = visitedCellsInOrder[i];
-            document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+            if(cell.isStart === false && cell.isFinish === false )
+            {
+              document.getElementById(`cell-${cell.row}-${cell.col}`).className =
               'cell cell-visited';
+            }
           }, 10 * i);
         }
       };
 
     const animateShortestPath = (cellsInShortestPathOrder) => {
-        for (let i = 1; i < cellsInShortestPathOrder.length-1; i++) {
+        for (let i = 0; i < cellsInShortestPathOrder.length; i++) {
           setTimeout(() => {
             const cell = cellsInShortestPathOrder[i];
-            document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+            if(cell.isStart === false && cell.isFinish === false )
+            {
+              document.getElementById(`cell-${cell.row}-${cell.col}`).className =
               'cell cell-shortest-path';
+            }
           }, 50 * i);
         }
       }
@@ -148,11 +157,24 @@ const GridLayout = ()=>{
     const visualizeDijkstra = () => {
         const startCell = grid[START_CELL_ROW][START_CELL_COL];
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+  
         visitedCellsInOrder.current = dijkstra(grid, startCell, finishCell);
-        console.log("visited cell : ",visitedCellsInOrder.current);
+        console.log("visited cell : ",visitedCellsInOrder.current);        
         cellsInShortestPathOrder.current = getNodesInShortestPathOrder(finishCell);
         console.log("shortest path : ",cellsInShortestPathOrder.current);
-        animateDijkstra(visitedCellsInOrder.current, cellsInShortestPathOrder.current);
+        animateAlgo(visitedCellsInOrder.current, cellsInShortestPathOrder.current);
+      };
+
+      const visualizeBFS = () => {
+        const startCell = grid[START_CELL_ROW][START_CELL_COL];
+        const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+
+        
+        visitedCellsInOrder.current = bfs(grid, startCell, finishCell);
+        console.log("visited cell : ",visitedCellsInOrder.current);
+        cellsInShortestPathOrder.current = getNodesInShortestPathOrderBfs(finishCell);
+        console.log("shortest path : ",cellsInShortestPathOrder.current);
+        animateAlgo(visitedCellsInOrder.current, cellsInShortestPathOrder.current);
       };
 
     useEffect(()=>{
@@ -168,14 +190,17 @@ const GridLayout = ()=>{
             <button onClick={() => visualizeDijkstra()}>
                 Visualize Dijkstra's Algorithm
             </button>
-            <button onClick ={ ()=>setRefresh(prevState=>!prevState) }>
+            <button onClick={() => visualizeBFS()}>
+                Visualize BFS Algorithm
+            </button>
+            <button onClick ={ ()=>setRefresh(prevState=>!prevState) }>          //for debug 
               render app
             </button>
             <button onClick = { resetPath }>
               Reset
             </button>
             <button onClick={ resetWalls }>
-              Clear Path
+              Reset Walls
             </button>
 
             <div className="grid">
@@ -223,8 +248,8 @@ const getInitialGrid = () => {
 
 const createNode = (col, row) => {
 return {
-    col,
     row,
+    col,
     isStart: row === START_CELL_ROW && col === START_CELL_COL,
     isFinish: row === FINISH_CELL_ROW && col === FINISH_CELL_COL,
     distance: Infinity,
@@ -254,6 +279,20 @@ const getNewGridWithStartToggled = (grid, row ,col , changeStart ,changeFinish) 
     isStart : changeStart ? node.isFinish ? node.isStart : !node.isStart : node.isStart,
   };
   newGrid[row][col] = newNode;
+  return newGrid;
+};
+
+const getNewGridWithPathReset = (grid,visitedCellsInOrder)=>{
+  const newGrid = grid.slice();
+  for ( const cell of visitedCellsInOrder)
+  {
+    const node = newGrid[cell.row][cell.col];
+    const newNode = {
+      ...node,
+      isVisited : false
+    };
+    newGrid[cell.row][cell.col] = newNode;
+  }
   return newGrid;
 };
 
