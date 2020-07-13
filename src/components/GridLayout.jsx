@@ -120,7 +120,7 @@ const GridLayout = ()=>{
     changeFinish =  false;
     },[]);
 
-
+    //----------------make a module of this--------------------------
     //----------------visual effect--------------
     const animateAlgo = (visitedCellsInOrder, cellsInShortestPathOrder) => {
         for (let i = 0; i < visitedCellsInOrder.length; i++) {
@@ -233,6 +233,7 @@ const GridLayout = ()=>{
 };
 
 
+//---------------------make module of this-----------------
 //---------------------function definations---------------
 const getInitialGrid = () => {
     const grid = [];
