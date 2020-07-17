@@ -2,7 +2,7 @@ const getInitialGrid = (START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CEL
     const grid = [];
     for (let row = 0; row < 25; row++) {
       const currentRow = [];
-      for (let col = 0; col < 50; col++) {
+      for (let col = 0; col < 52; col++) {
         currentRow.push(createNode(col, row , START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL));
       }
       grid.push(currentRow);
