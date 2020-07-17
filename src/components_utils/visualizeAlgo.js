@@ -34,6 +34,9 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
       }
 
     const visualizeDijkstra = (grid,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
+        console.log("start : ",START_CELL_ROW,START_CELL_COL);
+        console.log("finsih : ",FINISH_CELL_ROW,FINISH_CELL_COL);
+      
         const startCell = grid[START_CELL_ROW][START_CELL_COL];
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
   

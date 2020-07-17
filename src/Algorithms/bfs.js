@@ -5,6 +5,7 @@ let shortestPath = [];
 
 
 const bfs = (grid, startNode, finishNode)=>{
+    console.log("grid rece : ",grid);
     const q = new Queue();
 
     visitedNodesInOrder = [];
