@@ -49,7 +49,9 @@ const GridLayout = ()=>{
           document.getElementById(`cell-${cell.row}-${cell.col}`).classList.remove(`cell-shortest-path`);
         }, 2 * i);
       }
-      setGrid(getNewGridWithPathReset(grid,visitedCellsInOrder.current));
+      let pathResetGrid = getNewGridWithPathReset(grid,visitedCellsInOrder.current);
+      console.log("reset path : ",pathResetGrid);
+      setGrid(pathResetGrid);
     };
 
     const resetWalls = ()=>{
@@ -178,7 +180,7 @@ const GridLayout = ()=>{
             <div className="grid">
             {grid.map((row, rowIdx) => {
                 return (
-                <div key={rowIdx}>
+                <div key={rowIdx} className="row">
                     {row.map((node, nodeIdx) => {
                     const {row, col, isFinish, isStart, isWall} = node;
                         return (

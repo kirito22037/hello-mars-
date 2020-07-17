@@ -6,7 +6,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
           if (i === visitedCellsInOrder.length-1) {
             setTimeout(() => {
               animateShortestPath(cellsInShortestPathOrder);
-            }, 10 * i);
+            }, 7 * i);
             return;
           }
           setTimeout(() => {
@@ -16,7 +16,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
               document.getElementById(`cell-${cell.row}-${cell.col}`).className =
               'cell cell-visited';
             }
-          }, 10 * i);
+          }, 7 * i);
         }
       };
 

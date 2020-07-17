@@ -1,6 +1,6 @@
 const getInitialGrid = (START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
     const grid = [];
-    for (let row = 0; row < 20; row++) {
+    for (let row = 0; row < 25; row++) {
       const currentRow = [];
       for (let col = 0; col < 50; col++) {
         currentRow.push(createNode(col, row , START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL));
@@ -48,15 +48,21 @@ const getNewGridWithStartToggled = (grid, row ,col , changeStart ,changeFinish) 
 
 const getNewGridWithPathReset = (grid,visitedCellsInOrder)=>{
   const newGrid = grid.slice();
-  for ( const cell of visitedCellsInOrder)
+  for ( const row of newGrid)
   {
+    for( const cell of row)
+    {
     const node = newGrid[cell.row][cell.col];
     const newNode = {
       ...node,
-      isVisited : false
+      distance: Infinity,
+      isVisited : false,
+      previousNode: null,
     };
     newGrid[cell.row][cell.col] = newNode;
+    }
   }
+  console.log("new grid : ", newGrid);
   return newGrid;
 };
 
