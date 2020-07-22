@@ -1,7 +1,5 @@
-import React , { useState , useEffect , useRef , useContext } from 'react';
+import React , { useContext } from 'react';
 import { GridContext } from '../GridContext';
-//------------shortset path visualiser----------------
-
 
 
 //---------child component-------------------
@@ -14,33 +12,14 @@ const GridLayout = ()=>{
     console.log("GRIDLAYOUT rendered");   //for debug----
     
 
-    const { grid ,  resetPath , resetWalls , handleMouseDown , handleMouseEnter
-      , handleMouseLeave , handleMouseUp , handleRefresh } = useContext(GridContext);
-    const { handleBfsVisual , handleDijkastraVisual } = useContext(GridContext);
+    const { grid , handleMouseDown , handleMouseEnter
+      , handleMouseLeave , handleMouseUp } = useContext(GridContext);
      
     
     //--------------JSX--------------------------
     return(
         <div className="center-layout">
             
-            <button 
-            onClick={() => handleDijkastraVisual() }>
-                Visualize Dijkstra's Algorithm
-            </button>
-            <button 
-            onClick={() => handleBfsVisual() }>
-                Visualize BFS Algorithm
-            </button>
-            <button onClick ={ handleRefresh }>          //for debug 
-              render app
-            </button>
-            <button onClick = { resetPath }>
-              Reset
-            </button>
-            <button onClick={ resetWalls }>
-              Reset Walls
-            </button>
-
             <div className="grid">
             {grid.map((row, rowIdx) => {
                 return (

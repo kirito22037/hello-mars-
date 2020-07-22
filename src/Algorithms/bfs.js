@@ -11,10 +11,6 @@ const bfs = (grid, startNode, finishNode)=>{
     visitedNodesInOrder = [];
     shortestPath = [];
 
-    console.log("startNode : ",startNode);
-    console.log("finsihNode : ",finishNode);
-    console.log("grid : ",grid);
-
     startNode.isVisited = true;
     q.enqueue(startNode); 
     visitedNodesInOrder.push(startNode);
@@ -22,7 +18,6 @@ const bfs = (grid, startNode, finishNode)=>{
 
     while(!q.isEmpty())
     {
-        //console.log("queue : ",q.printQueue());
         const currentNode = q.dequeue();
 
         if(currentNode.isFinish === true)
@@ -31,7 +26,6 @@ const bfs = (grid, startNode, finishNode)=>{
         }
 
         const neighbours = getNeighbours(currentNode,grid);    //donot include walls
-        //console.log("neighbours : ", neighbours);
 
         for (const node of neighbours)
         {
@@ -40,7 +34,6 @@ const bfs = (grid, startNode, finishNode)=>{
                 node.isVisited = true;
                 node.previousNode = currentNode;
                 q.enqueue(node);
-                //console.log("endueued : ",node);
                 visitedNodesInOrder.push(node);
             }
         }
@@ -54,9 +47,7 @@ const bfs = (grid, startNode, finishNode)=>{
 function getNeighbours(currentNode , grid)
 {
     const neighbours = [];
-    const {row , col } = currentNode;
-
-    //console.log("current node : ",currentNode);                           
+    const {row , col } = currentNode;                           
     
     if (col < grid[0].length - 1) 
     {
@@ -79,7 +70,6 @@ function getNeighbours(currentNode , grid)
 };
 
 function getNodesInShortestPathOrderBfs(finishCell){
-    const {row , col} = finishCell;
 
     if(finishCell.previousNode === null)
     return shortestPath;

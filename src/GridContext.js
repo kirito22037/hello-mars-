@@ -6,16 +6,13 @@ import {
     getNewGridWithWallsReset,
     getNewGridWithWallToggled
   } from './components_utils/gridToggle';
-  import {visualizeBFS,
-    visualizeDijkstra} from './components_utils/visualizeAlgo';
-
 
 export const GridContext = React.createContext();
 
 const GridProvider = (props) => {
 
     const START_CELL_ROW = useRef(10);
-    const START_CELL_COL = useRef(15);
+    const START_CELL_COL = useRef(16);
     const FINISH_CELL_ROW = useRef(10);
     const FINISH_CELL_COL = useRef(35);
 
@@ -69,16 +66,11 @@ const GridProvider = (props) => {
                   return newGrid;
                 });
               }
-              //mouseIsPressed.current = true ;
               mouseIsPressed = true ;
             },[]);
           
           
           const handleMouseEnter = useCallback((row, col) => {
-            //console.log("start : ",START_CELL_ROW.current,START_CELL_COL.current);
-      
-            //console.log("chnage start : ",changeStart);
-            //console.log("mouseIsPressed : ",mouseIsPressed);
             if (!mouseIsPressed) return;
       
             if(changeStart || changeFinish)
@@ -118,32 +110,12 @@ const GridProvider = (props) => {
           },[]);
       
           const handleMouseUp = useCallback(() => {
-          console.log("start : ",START_CELL_ROW.current,START_CELL_COL.current);
-          console.log("finsih : ",FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
           mouseIsPressed = false;
           changeStart = false;
           changeFinish =  false;
           },[]);
-        
-
-          //-------------------algo -------------------
-          const handleDijkastraVisual = ()=>{
-            console.log("start : ",START_CELL_ROW.current,START_CELL_COL.current);
-            console.log("finsih : ",FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
-            let result = visualizeDijkstra(grid,START_CELL_ROW.current,START_CELL_COL.current,FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
-            
-            visitedCellsInOrder.current = result.visitedCellsInOrder;
-            cellsInShortestPathOrder.current = result.cellsInShortestPathOrder;
-          };
-      
-          const handleBfsVisual = () =>{
-            let result = visualizeBFS(grid,START_CELL_ROW.current,START_CELL_COL.current,FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
-            
-            visitedCellsInOrder.current = result.visitedCellsInOrder;
-            cellsInShortestPathOrder.current = result.cellsInShortestPathOrder;
-          };
-
-
+          
+          //for debug purpose
           const handleRefresh = ()=> { setRefresh(prevState=>!prevState) };
 
           useEffect(()=>{
@@ -153,9 +125,20 @@ const GridProvider = (props) => {
           },[]);
 
           return(
-            <GridContext.Provider value={ { grid , START_CELL_ROW , START_CELL_COL , FINISH_CELL_ROW , FINISH_CELL_COL , visitedCellsInOrder , cellsInShortestPathOrder , resetPath , resetWalls , handleMouseDown , handleMouseEnter
-             , handleMouseLeave , handleMouseUp , handleRefresh , handleDijkastraVisual
-              , handleBfsVisual } }>
+            <GridContext.Provider value={ { grid , 
+              START_CELL_ROW , 
+              START_CELL_COL , 
+              FINISH_CELL_ROW , 
+              FINISH_CELL_COL , 
+              visitedCellsInOrder , 
+              cellsInShortestPathOrder , 
+              resetPath , 
+              resetWalls , 
+              handleMouseDown , 
+              handleMouseEnter , 
+              handleMouseLeave , 
+              handleMouseUp , 
+              handleRefresh } }>
                 { props.children }
             </GridContext.Provider>
         );

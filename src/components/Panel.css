@@ -1,35 +1,32 @@
 .panel {
-    position: fixed;
-    padding: 20px;
+    position: absolute;
+    padding: 1rem;
     background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
     border-radius: 8px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: default;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 0.5rem;
 }
 
-.right_panel {
-    width: 250px;
-    top : 30px;
-    right: 50px;
+.center_panel {
+    top : 20px;
+    left : 50%;
+    transform: translateX(-50%);
 }
 
 .button {
     border: none;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
-    font-size: 90%;
+    font-family: sans-serif;
     cursor: pointer;
-    padding: 2px 8px;
-    margin: 0 2%;
-    width: 28%;
+    width: 8rem;
+    height :2rem;
 }
 
 .button:hover {
     background: rgba(255, 255, 255, 0.9);
-}
-
-#algorithm_panel {
-    right: 20px;
-    top: 20px;
 }
