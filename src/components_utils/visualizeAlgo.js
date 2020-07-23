@@ -1,5 +1,6 @@
-const {dijkstra, getNodesInShortestPathOrder} = require('../Algorithms/dijkstra');
-const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
+const {dijkstra } = require('../Algorithms/dijkstra');
+const { bfs } = require('../Algorithms/bfs');
+const { getNodesInShortestPathOrder } = require('../Algorithms/AlgoUtils/gridUtils');
 
     //animate the iterartion path of algorithm
     const animateAlgo = (visitedCellsInOrder, cellsInShortestPathOrder) => {
@@ -67,7 +68,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
         
         let visitedCellsInOrder = bfs(grid, startCell, finishCell , diagonal );
-        let cellsInShortestPathOrder = getNodesInShortestPathOrderBfs(finishCell);
+        let cellsInShortestPathOrder = getNodesInShortestPathOrder(finishCell);
         animateAlgo(visitedCellsInOrder, cellsInShortestPathOrder);
 
         return {
