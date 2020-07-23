@@ -1,3 +1,5 @@
+
+//-----------------inititalize the GRID state--------------------
 const getInitialGrid = (START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
     const grid = [];
     for (let row = 0; row < 25; row++) {
@@ -10,6 +12,7 @@ const getInitialGrid = (START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CEL
     return grid;
   };
 
+  //------------------------create individual node/cell with default property---------------------------
 const createNode = (col, row ,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
 return {
     row,
@@ -23,6 +26,7 @@ return {
 };
 };
 
+//--------------to change a wall property of a cell----------------------------
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
@@ -34,6 +38,7 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   return newGrid;
 };
 
+//-----------------------to change start and end point------------------------
 const getNewGridWithStartToggled = (grid, row ,col , changeStart ,changeFinish) =>{
   const newGrid = grid.slice();
   const node = newGrid[row][col];
@@ -46,6 +51,7 @@ const getNewGridWithStartToggled = (grid, row ,col , changeStart ,changeFinish) 
   return newGrid;
 };
 
+//---------------------------to reset path-----------------------------------------
 const getNewGridWithPathReset = (grid,visitedCellsInOrder)=>{
   const newGrid = grid.slice();
   for ( const row of newGrid)
@@ -66,6 +72,7 @@ const getNewGridWithPathReset = (grid,visitedCellsInOrder)=>{
   return newGrid;
 };
 
+//-------------------reset wall/obstecles-----------------------
 const getNewGridWithWallsReset = (grid)=>{
   const newGrid = grid.slice();
   for ( const row of newGrid)
@@ -82,6 +89,7 @@ const getNewGridWithWallsReset = (grid)=>{
   }
   return newGrid;
 };
+
 
 module.exports = {
     getInitialGrid,

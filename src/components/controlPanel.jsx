@@ -17,8 +17,6 @@ const ControlPanel = () =>{
 
      //-------------------algo -------------------
      const handleDijkastraVisual = ()=>{
-        console.log("start : ",START_CELL_ROW.current,START_CELL_COL.current);
-        console.log("finsih : ",FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
         let result = visualizeDijkstra(grid,START_CELL_ROW.current,START_CELL_COL.current,FINISH_CELL_ROW.current,FINISH_CELL_COL.current);
         
         visitedCellsInOrder.current = result.visitedCellsInOrder;

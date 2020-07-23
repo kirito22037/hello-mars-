@@ -1,6 +1,7 @@
 const {dijkstra, getNodesInShortestPathOrder} = require('../Algorithms/dijkstra');
 const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
 
+    //animate the iterartion path of algorithm
     const animateAlgo = (visitedCellsInOrder, cellsInShortestPathOrder) => {
         for (let i = 0; i < visitedCellsInOrder.length; i++) {
           if (i === visitedCellsInOrder.length-1) {
@@ -20,6 +21,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
         }
       };
 
+    //animate the shortest path
     const animateShortestPath = (cellsInShortestPathOrder) => {
         for (let i = 0; i < cellsInShortestPathOrder.length; i++) {
           setTimeout(() => {
@@ -33,6 +35,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
         }
       }
 
+    //to visualize the Dijkastra algorithm
     const visualizeDijkstra = (grid,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
         console.log("start : ",START_CELL_ROW,START_CELL_COL);
         console.log("finsih : ",FINISH_CELL_ROW,FINISH_CELL_COL);
@@ -53,6 +56,7 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
         };
       };
 
+      //to animate the BFS algo
       const visualizeBFS = (grid,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
         const startCell = grid[START_CELL_ROW][START_CELL_COL];
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];

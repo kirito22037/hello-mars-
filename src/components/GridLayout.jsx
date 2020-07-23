@@ -1,16 +1,14 @@
 import React , { useContext } from 'react';
 import { GridContext } from '../GridContext';
-
+import './GridLayout.css';
 
 //---------child component-------------------
 import Cell from './Cell';
-import './GridLayout.css';
+
 
 
 //---------------React Functional Component--------------------
 const GridLayout = ()=>{
-    console.log("GRIDLAYOUT rendered");   //for debug----
-    
 
     const { grid , handleMouseDown , handleMouseEnter
       , handleMouseLeave , handleMouseUp } = useContext(GridContext);

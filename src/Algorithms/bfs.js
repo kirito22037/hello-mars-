@@ -1,15 +1,13 @@
+//import queue 
 const Queue = require('./AlgoUtils/queue');
 
-let visitedNodesInOrder = [];
-let shortestPath = [];
 
-
+//perform BREATH FIRST SEARCH 
 const bfs = (grid, startNode, finishNode)=>{
     console.log("grid rece : ",grid);
     const q = new Queue();
 
-    visitedNodesInOrder = [];
-    shortestPath = [];
+    let visitedNodesInOrder = [];
 
     startNode.isVisited = true;
     q.enqueue(startNode); 
@@ -43,9 +41,8 @@ const bfs = (grid, startNode, finishNode)=>{
     return visitedNodesInOrder;
 }
 
-
-function getNeighbours(currentNode , grid)
-{
+//helper fucntion to get neigbouring nodes/cells
+const getNeighbours = (currentNode , grid)=>{
     const neighbours = [];
     const {row , col } = currentNode;                           
     
@@ -69,7 +66,10 @@ function getNeighbours(currentNode , grid)
     return neighbours;
 };
 
-function getNodesInShortestPathOrderBfs(finishCell){
+//to get the shortest path 
+const getNodesInShortestPathOrderBfs = (finishCell)=>{
+
+    let shortestPath = [];
 
     if(finishCell.previousNode === null)
     return shortestPath;
