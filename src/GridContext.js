@@ -23,8 +23,13 @@ const GridProvider = (props) => {
     let changeStart = false;
     let changeFinish = false;
 
+    let [diagonal , setDiagonal] = useState(false);
     let visitedCellsInOrder = useRef([]);
     let cellsInShortestPathOrder = useRef([]);
+
+    const toogleDiagonal = (status)=>{
+       setDiagonal(status);
+    };
 
 
     //---------------reset path and walls-----------------------------------
@@ -124,8 +129,15 @@ const GridProvider = (props) => {
       setGrid(initGrid);
     },[]);
 
+    useEffect(()=>{
+      console.log("changed");
+    },[diagonal.current]);
+
+    //----------------------JSX-------------------------------
     return(
       <GridContext.Provider value={ { grid , 
+        diagonal ,
+        toogleDiagonal ,
         START_CELL_ROW , 
         START_CELL_COL , 
         FINISH_CELL_ROW , 

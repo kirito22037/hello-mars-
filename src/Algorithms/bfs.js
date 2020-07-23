@@ -3,8 +3,7 @@ const Queue = require('./AlgoUtils/queue');
 
 
 //perform BREATH FIRST SEARCH 
-const bfs = (grid, startNode, finishNode)=>{
-    console.log("grid rece : ",grid);
+const bfs = (grid, startNode, finishNode , diagonal)=>{
     const q = new Queue();
 
     let visitedNodesInOrder = [];
@@ -23,7 +22,7 @@ const bfs = (grid, startNode, finishNode)=>{
             break;
         }
 
-        const neighbours = getNeighbours(currentNode,grid);    //donot include walls
+        const neighbours = getNeighbours(currentNode,grid,diagonal);    //donot include walls
 
         for (const node of neighbours)
         {
@@ -37,31 +36,52 @@ const bfs = (grid, startNode, finishNode)=>{
         }
     }
 
-    console.log("visitedNodesInOrder : ",visitedNodesInOrder);
     return visitedNodesInOrder;
 }
 
 //helper fucntion to get neigbouring nodes/cells
-const getNeighbours = (currentNode , grid)=>{
+const getNeighbours = (currentNode , grid , diagonal )=>{
     const neighbours = [];
     const {row , col } = currentNode;                           
     
     if (col < grid[0].length - 1) 
     {
-        if(grid[row][col + 1].isWall === false) neighbours.push(grid[row][col + 1]);           //front
+        if(!grid[row][col + 1].isWall)
+        neighbours.push(grid[row][col + 1]);           //front
     }
     if (col > 0) 
     {
-        if(grid[row][col - 1].isWall === false) neighbours.push(grid[row][col - 1]);                            //back
+        if(!grid[row][col - 1].isWall)
+        neighbours.push(grid[row][col - 1]);                            //back
     }
     if (row < grid.length - 1) 
     {
-        if(grid[row + 1][col].isWall === false) neighbours.push(grid[row + 1][col]);              //down
+        if(!grid[row + 1][col].isWall)
+        neighbours.push(grid[row + 1][col]);              //down
     }
     if (row > 0) 
     {
-        if(grid[row - 1][col].isWall === false)  neighbours.push(grid[row - 1][col]);  //up
+        if(!grid[row - 1][col].isWall)
+        neighbours.push(grid[row - 1][col]);  //up
     } 
+
+    if(diagonal === true)
+    {
+        if(row>0 && col>0 && row<grid.length-1 && col<grid[0].length-1)
+        {
+            if(!grid[row - 1][col - 1].isWall) 
+            neighbours.push(grid[row - 1][col - 1]);
+            
+            if(!grid[row - 1][col + 1].isWall)
+            neighbours.push(grid[row - 1][col + 1]);
+
+            if(!grid[row + 1][col - 1].isWall) 
+            neighbours.push(grid[row + 1][col - 1]);
+            
+            if(!grid[row + 1][col + 1].isWall)
+            neighbours.push(grid[row - 1][col - 1]);
+        }
+    }
 
     return neighbours;
 };

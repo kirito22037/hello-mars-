@@ -36,19 +36,19 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
       }
 
     //to visualize the Dijkastra algorithm
-    const visualizeDijkstra = (grid,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
-        console.log("start : ",START_CELL_ROW,START_CELL_COL);
-        console.log("finsih : ",FINISH_CELL_ROW,FINISH_CELL_COL);
-      
+    const visualizeDijkstra = (grid,
+      diagonal,
+      START_CELL_ROW,
+      START_CELL_COL,
+      FINISH_CELL_ROW,
+      FINISH_CELL_COL) => {
+  
         const startCell = grid[START_CELL_ROW][START_CELL_COL];
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
   
-        let visitedCellsInOrder = dijkstra(grid, startCell, finishCell);        
+        let visitedCellsInOrder = dijkstra(grid, startCell, finishCell , diagonal);        
         let cellsInShortestPathOrder = getNodesInShortestPathOrder(finishCell);
         animateAlgo(visitedCellsInOrder, cellsInShortestPathOrder);
-
-        console.log("visited cell : ",visitedCellsInOrder);
-        console.log("shortest path : ",cellsInShortestPathOrder);
 
         return {
             visitedCellsInOrder,
@@ -57,17 +57,18 @@ const { bfs, getNodesInShortestPathOrderBfs } = require('../Algorithms/bfs');
       };
 
       //to animate the BFS algo
-      const visualizeBFS = (grid,START_CELL_ROW,START_CELL_COL,FINISH_CELL_ROW,FINISH_CELL_COL) => {
+      const visualizeBFS = (grid,
+        diagonal,
+        START_CELL_ROW,
+        START_CELL_COL,
+        FINISH_CELL_ROW,
+        FINISH_CELL_COL) => {
         const startCell = grid[START_CELL_ROW][START_CELL_COL];
         const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
-
         
-        let visitedCellsInOrder = bfs(grid, startCell, finishCell);
+        let visitedCellsInOrder = bfs(grid, startCell, finishCell , diagonal );
         let cellsInShortestPathOrder = getNodesInShortestPathOrderBfs(finishCell);
         animateAlgo(visitedCellsInOrder, cellsInShortestPathOrder);
-
-        console.log("visited cell : ",visitedCellsInOrder);
-        console.log("shortest path : ",cellsInShortestPathOrder);
 
         return {
             visitedCellsInOrder,
