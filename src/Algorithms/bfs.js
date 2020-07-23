@@ -23,7 +23,7 @@ const bfs = (grid, startNode, finishNode , diagonal)=>{
         }
 
         const neighbours = getNeighbours(currentNode,grid,diagonal);    //donot include walls
-
+        
         for (const node of neighbours)
         {
             if(node.isVisited === false) 
@@ -35,7 +35,7 @@ const bfs = (grid, startNode, finishNode , diagonal)=>{
             }
         }
     }
-
+    
     return visitedNodesInOrder;
 }
 
@@ -44,45 +44,45 @@ const getNeighbours = (currentNode , grid , diagonal )=>{
     const neighbours = [];
     const {row , col } = currentNode;                           
     
+    if (row > 0) 
+    {
+        if(!grid[row - 1][col].isWall)
+        neighbours.push(grid[row - 1][col]);  //up
+    } 
     if (col < grid[0].length - 1) 
     {
         if(!grid[row][col + 1].isWall)
         neighbours.push(grid[row][col + 1]);           //front
-    }
-    if (col > 0) 
-    {
-        if(!grid[row][col - 1].isWall)
-        neighbours.push(grid[row][col - 1]);                            //back
     }
     if (row < grid.length - 1) 
     {
         if(!grid[row + 1][col].isWall)
         neighbours.push(grid[row + 1][col]);              //down
     }
-    if (row > 0) 
+    if (col > 0) 
     {
-        if(!grid[row - 1][col].isWall)
-        neighbours.push(grid[row - 1][col]);  //up
-    } 
+        if(!grid[row][col - 1].isWall)
+        neighbours.push(grid[row][col - 1]);                            //back
+    }
 
     if(diagonal === true)
     {
         if(row>0 && col>0 && row<grid.length-1 && col<grid[0].length-1)
         {
-            if(!grid[row - 1][col - 1].isWall) 
+            if(!grid[row - 1][col - 1].isWall)
             neighbours.push(grid[row - 1][col - 1]);
-            
-            if(!grid[row - 1][col + 1].isWall)
-            neighbours.push(grid[row - 1][col + 1]);
 
             if(!grid[row + 1][col - 1].isWall) 
             neighbours.push(grid[row + 1][col - 1]);
             
             if(!grid[row + 1][col + 1].isWall)
-            neighbours.push(grid[row - 1][col - 1]);
+            neighbours.push(grid[row + 1][col + 1]);
+
+            if(!grid[row - 1][col + 1].isWall) 
+            neighbours.push(grid[row - 1][col + 1]);
         }
     }
-
+   
     return neighbours;
 };
 
@@ -102,7 +102,7 @@ const getNodesInShortestPathOrderBfs = (finishCell)=>{
         currentCell = currentCell.previousNode;
     }
     shortestPath.push(currentCell);
-
+    
     return shortestPath.reverse();
 }
 

@@ -35,19 +35,20 @@ function updateUnvisitedNeighbors(node, grid, diagonal) {
 function getUnvisitedNeighbors(node, grid, diagonal) {
   const neighbors = [];
   const {col, row} = node;
+  
   if (row > 0) neighbors.push(grid[row - 1][col]);
+  if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
   if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
   if (col > 0) neighbors.push(grid[row][col - 1]);
-  if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
 
   if(diagonal === true)
   {
       if(row>0 && col>0 && row<grid.length-1 && col<grid[0].length-1)
       {
         neighbors.push(grid[row - 1][col - 1]);
-        neighbors.push(grid[row - 1][col + 1]);
         neighbors.push(grid[row + 1][col - 1]);
         neighbors.push(grid[row + 1][col + 1]);
+        neighbors.push(grid[row - 1][col + 1]);
       }
   }
   return neighbors.filter(neighbor => !neighbor.isVisited);
@@ -62,7 +63,7 @@ function getAllNodes(grid) {
   }
   return nodes;
 }
-
+/*
 // Backtracks from the finishNode to find the shortest path.
 // Only works when called *after* the dijkstra method above.
 export function getNodesInShortestPathOrder(finishNode) {
@@ -73,4 +74,23 @@ export function getNodesInShortestPathOrder(finishNode) {
     currentNode = currentNode.previousNode;
   }
   return nodesInShortestPathOrder;
+}
+*/
+export const getNodesInShortestPathOrder = (finishCell)=>{
+
+  let shortestPath = [];
+
+  if(finishCell.previousNode === null)
+  return shortestPath;
+  
+  let currentCell = finishCell;
+
+  while(!currentCell.isStart)
+  {
+      shortestPath.push(currentCell);
+      currentCell = currentCell.previousNode;
+  }
+  shortestPath.push(currentCell);
+  
+  return shortestPath.reverse();
 }
