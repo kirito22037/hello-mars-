@@ -1,5 +1,5 @@
 import React , { useContext } from 'react';
-import { GridContext } from '../GridContext';
+import { GridContext } from '../context/GridContext';
 import './GridLayout.css';
 
 //---------child component-------------------

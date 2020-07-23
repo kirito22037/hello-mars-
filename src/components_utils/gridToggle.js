@@ -68,7 +68,7 @@ const getNewGridWithPathReset = (grid,visitedCellsInOrder)=>{
     newGrid[cell.row][cell.col] = newNode;
     }
   }
-  console.log("new grid : ", newGrid);
+  
   return newGrid;
 };
 

@@ -5,7 +5,7 @@ import {
     getNewGridWithStartToggled,
     getNewGridWithWallsReset,
     getNewGridWithWallToggled
-  } from './components_utils/gridToggle';
+  } from '../components_utils/gridToggle';
 
 export const GridContext = React.createContext();
 
@@ -34,7 +34,7 @@ const GridProvider = (props) => {
 
     //---------------reset path and walls-----------------------------------
     const resetPath = ()=>{
-        console.log("visited : ",visitedCellsInOrder.current);
+        
         for (let i = 0; i < visitedCellsInOrder.current.length; i++) {
           setTimeout(() => {
             const cell = visitedCellsInOrder.current[i];
@@ -43,7 +43,7 @@ const GridProvider = (props) => {
           }, 2 * i);
         }
         let pathResetGrid = getNewGridWithPathReset(grid,visitedCellsInOrder.current);
-        console.log("reset path : ",pathResetGrid);
+        
         setGrid(pathResetGrid);
       };
       

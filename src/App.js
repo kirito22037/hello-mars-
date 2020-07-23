@@ -1,7 +1,7 @@
 import React from 'react';
 import GridLayout from './components/GridLayout';
 import ControlPanel from './components/controlPanel';
-import GridProvider from './GridContext';
+import GridProvider from './context/GridContext';
 
 function App() {
   return (

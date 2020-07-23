@@ -1,4 +1,4 @@
-//helper fucntion to get neigbouring nodes/cells
+//helper fucntion to get unvisited , neigbouring nodes/cells (without walls)
 const getUnvisitedNeighbors = (currentNode , grid , diagonal )=>{
     const neighbors = [];
     let s0 = false , d0 = false ,
@@ -11,26 +11,26 @@ const getUnvisitedNeighbors = (currentNode , grid , diagonal )=>{
     
     if (row > 0) 
     {
-        if(!grid[row - 1][col].isWall && !grid[row - 1][col].isVisited){
+        if(!grid[row - 1][col].isWall ){
         neighbors.push(grid[row - 1][col]);  //up
         s0 = true ;}
 
     } 
     if (col < grid[0].length - 1) 
     {
-        if(!grid[row][col + 1].isWall && !grid[row][col + 1].isVisited){
+        if(!grid[row][col + 1].isWall ){
         neighbors.push(grid[row][col + 1]);
         s1 = true ;}           //front
     }
     if (row < grid.length - 1) 
     {
-        if(!grid[row + 1][col].isWall && !grid[row + 1][col].isVisited){
+        if(!grid[row + 1][col].isWall ){
         neighbors.push(grid[row + 1][col]);
         s2 = true ;}              //down
     }
     if (col > 0) 
     {
-        if(!grid[row][col - 1].isWall && !grid[row][col - 1].isVisited){
+        if(!grid[row][col - 1].isWall ){
         neighbors.push(grid[row][col - 1]);
         s3 = true ;}                            //back
     }
@@ -44,22 +44,21 @@ const getUnvisitedNeighbors = (currentNode , grid , diagonal )=>{
 
         if(row>0 && col>0 && row<grid.length-1 && col<grid[0].length-1)
         {
-            if(d0 && !grid[row - 1][col - 1].isWall && !grid[row - 1][col - 1].isVisited)
+            if(d0 && !grid[row - 1][col - 1].isWall )  
             neighbors.push(grid[row - 1][col - 1]);
-
-            if(d1 && !grid[row + 1][col - 1].isWall && !grid[row + 1][col - 1].isVisited) 
-            neighbors.push(grid[row + 1][col - 1]);
             
-            if(d2 && !grid[row + 1][col + 1].isWall && !grid[row + 1][col + 1].isVisited)
+            if(d1 && !grid[row - 1][col + 1].isWall ) 
+            neighbors.push(grid[row - 1][col + 1]);
+
+            if(d2 && !grid[row + 1][col + 1].isWall )
             neighbors.push(grid[row + 1][col + 1]);
 
-            if(d3 && !grid[row - 1][col + 1].isWall && !grid[row - 1][col + 1].isVisited) 
-            neighbors.push(grid[row - 1][col + 1]);
+            if(d3 && !grid[row + 1][col - 1].isWall ) 
+            neighbors.push(grid[row + 1][col - 1]);
         }
     }
     
-    return neighbors;
-    //return neighbors.filter(neighbour => !neighbour.isVisited);;
+    return neighbors.filter(neighbour => !neighbour.isVisited);;
 };
 
 //to get the shortest path 

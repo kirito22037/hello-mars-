@@ -20,12 +20,11 @@ const dijkstra = (grid, startNode, finishNode , diagonal) => {
 
 const sortNodesByDistance = (unvisitedNodes) => {
   unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
-  console.log("unvisited : ", unvisitedNodes);
 }
 
 const updateUnvisitedNeighbors = (node, grid, diagonal) => {
   const unvisitedNeighbors = GRID.getUnvisitedNeighbors(node, grid , diagonal);
-  console.log("unvis neigh : ",unvisitedNeighbors);
+  
   for (const neighbor of unvisitedNeighbors) {
     if(neighbor.distance === Infinity)
     { 
