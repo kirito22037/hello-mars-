@@ -81,7 +81,7 @@ const getNodesInShortestPathOrder = (finishCell)=>{
     return shortestPath.reverse();
 }
 
-module.exports = {
+export {
     getUnvisitedNeighbors,
     getNodesInShortestPathOrder
 }

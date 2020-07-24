@@ -1,4 +1,4 @@
-const GRID = require('./AlgoUtils/gridUtils');
+import * as GRID from './AlgoUtils/gridUtils';
 
 // Performs Dijkstra's algorithm
 const dijkstra = (grid, startNode, finishNode , diagonal) => {
@@ -44,6 +44,4 @@ const getAllNodes = (grid) => {
   return nodes;
 }
 
-module.exports = {
-  dijkstra
-};
+export default dijkstra;

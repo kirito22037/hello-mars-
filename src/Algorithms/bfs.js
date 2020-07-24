@@ -1,6 +1,6 @@
 //import queue 
-const Queue = require('./AlgoUtils/queue');
-const GRID = require('./AlgoUtils/gridUtils');
+import Queue from './AlgoUtils/queue';
+import * as GRID from './AlgoUtils/gridUtils';
 
 //perform BREATH FIRST SEARCH 
 const bfs = (grid, startNode, finishNode , diagonal)=>{
@@ -36,6 +36,4 @@ const bfs = (grid, startNode, finishNode , diagonal)=>{
     return visitedNodesInOrder;
 }
 
-module.exports = {
-    bfs
-}
+export default bfs;

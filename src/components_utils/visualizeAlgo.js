@@ -1,5 +1,5 @@
-const {dijkstra } = require('../Algorithms/dijkstra');
-const { bfs } = require('../Algorithms/bfs');
+import dijkstra from '../Algorithms/dijkstra';
+import bfs from '../Algorithms/bfs';
 const { getNodesInShortestPathOrder } = require('../Algorithms/AlgoUtils/gridUtils');
 
     //animate the iterartion path of algorithm
@@ -78,7 +78,7 @@ const { getNodesInShortestPathOrder } = require('../Algorithms/AlgoUtils/gridUti
       };
 
 
-module.exports = {
+export {
     visualizeBFS,
     visualizeDijkstra
 };

@@ -91,7 +91,7 @@ const getNewGridWithWallsReset = (grid)=>{
 };
 
 
-module.exports = {
+export {
     getInitialGrid,
     getNewGridWithPathReset,
     getNewGridWithStartToggled,
