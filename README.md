@@ -1,5 +1,4 @@
 
-=======
 ### npm start
 npx create-react-app my-app
 cd my-app
@@ -128,11 +127,11 @@ https://github.com/beardedghost45
 
 This application supports the following algorithms: 
 
-**Dijkstra's Algorithm** (weighted): the father of pathfinding algorithms; guarantees the shortest path
+**Dijkstra's Algorithm** : the father of pathfinding algorithms; guarantees the shortest path
 
-**Breath-first Search** (unweighted): a great algorithm; guarantees the shortest path
+**Breath-first Search** : a great algorithm; guarantees the shortest path
 
-**Depth-first Search** (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path
+**Depth-first Search** : a very bad algorithm for pathfinding; does not guarantee the shortest path
 
 On top of the pathfinding algorithms listed above, I implemented a **Recursive Division** Maze Generation algorithm.
 
@@ -142,5 +141,19 @@ The algorithm exists in many variants. Dijkstra's original algorithm found the s
 For a given source node in the graph, the algorithm finds the shortest path between that node and every other. It can also be used for finding the shortest paths from a single node to a single destination node by stopping the algorithm once the shortest path to the destination node has been determined. For example, if the nodes of the graph represent cities and edge path costs represent driving distances between pairs of cities connected by a direct road (for simplicity, ignore red lights, stop signs, toll roads and other obstructions), Dijkstra's algorithm can be used to find the shortest route between one city and all other cities. A widely used application of shortest path algorithm is network routing protocols, most notably IS-IS (Intermediate System to Intermediate System) and Open Shortest Path First (OSPF).
 
 ## More about the BFS algorithm
-
-
+Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root or some arbitrary node of a graph, sometimes referred to as a 'search key', and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.
+___________________________________________________________________________________________________________________________________________________
+1  procedure BFS(G, root) is
+2      let Q be a queue
+3      label root as discovered
+4      Q.enqueue(root)
+5      while Q is not empty do
+6          v := Q.dequeue()
+7          if v is the goal then
+8              return v
+9          for all edges from v to w in G.adjacentEdges(v) do
+10             if w is not labeled as discovered then
+11                 label w as discovered
+12                 w.parent := v
+13                 Q.enqueue(w)
+________________________________________________________________________________________________________________________________________________________
