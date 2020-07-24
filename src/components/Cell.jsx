@@ -1,4 +1,4 @@
-import React , { useEffect } from 'react';
+import React from 'react';
 
 import './Cell.css';
 
@@ -8,19 +8,6 @@ let Cell = ({ col, row , isFinish, isStart, isWall, onMouseDown, onMouseEnter, o
     const dynamicStyleClass = isFinish ? 'cell-finish' :
     isStart ? 'cell-start' : 
     isWall ? 'cell-wall' : '';
-    
-    /*
-    useEffect(()=>{
-        console.log(`Cell ${row},${col} is  MOUNTED `);
-    },[]); */
-
-    useEffect(()=>{
-        console.log('onMouseDown changed');
-    },[onMouseDown]);
-
-    useEffect(()=>{
-        console.log('onMouseEnter changed');
-    },[onMouseEnter]);
 
     return (
         <div

@@ -1,8 +1,8 @@
-.grid {
-    margin-top: 3rem;
-  }
+.row{
+  display: flex;
+}
 
 .center-layout{
     margin : auto;
-    min-width: 1256px;
+    min-width: 1456px;
 }
