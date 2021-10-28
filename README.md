@@ -1,3 +1,18 @@
+# MARS ROVER ( path finding visualizer )
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46826283/139253930-3873a874-13a6-4965-8c95-e026c1e3b96f.gif" />
+</p>
+
+## Tech Stack Used
+<p align="center">
+<img height="60" width="60"  src="https://user-images.githubusercontent.com/46826283/139259264-870432e2-a024-44b8-86c7-41e424f235dd.png" />
+
+<img height="60" width="80" src="https://user-images.githubusercontent.com/46826283/139255305-a04a635f-861b-40cf-be09-a78ec57bde84.png" />
+
+<img height="50" width="50" src="https://user-images.githubusercontent.com/46826283/139254580-65ca0157-ff44-4902-bf87-56b9e1380d92.png" />
+</p>
+
 # HOW TO RUN
 
 1. First Open a cmd promt or terminal in root folder of this repo and Install Node Modules and dependencies using this cmd.
