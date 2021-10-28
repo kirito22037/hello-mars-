@@ -7,7 +7,7 @@ import {
     getNewGridWithWallToggled
   } from '../components_utils/gridToggle';
 
-export const GridContext = React.createContext();
+export const GridContext = React.createContext(null);
 
 const GridProvider = (props) => {
 

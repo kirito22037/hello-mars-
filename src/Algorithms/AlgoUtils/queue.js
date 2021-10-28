@@ -32,10 +32,10 @@ class Queue {
     }
 
     printQueue() 
-    { 
-        var str = ""; 
-        for(var i = 0; i < this.data.length; i++) 
-            str += `${this.data[i].row} , ${this.data[i].col}` +" "; 
+    {
+        let str = "";
+        for(let i = 0; i < this.data.length; i++)
+            str = `${str} ${this.data[i].row} , ${this.data[i].col} `;
         return str; 
     } 
   }
